@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '../../assets/logo.png' 
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from 'react-icons/fa6';
 import DarkMode from './DarkMode';
+import { CartContext } from '../TrendingProduct/Features/ContextProvider';
 
 
 const Menu = [
@@ -57,6 +58,7 @@ const DropdownLinks = [
 ]
 
 const Navbar = () => {
+  const {cart} = useContext(CartContext)
   return (
     <div className='shadow-md bg-white dark:bg-gray dark:bg-gray-900 dark:text-white
     duration-200 relative z-10'>
@@ -95,8 +97,8 @@ const Navbar = () => {
               <span className='group-hover:block hidden transition-all duration-200'>
                 Cart
               </span>
-              <a href="/CartPage">
-              <FaCartShopping className='text-xl text-white drop-shadow-sm cursor-pointer '/>
+              <a href="/Cart">
+              <FaCartShopping className='text-xl text-white drop-shadow-sm cursor-pointer '/>{cart.length}
               </a>
             </button>
             {/* darkmode switch */}

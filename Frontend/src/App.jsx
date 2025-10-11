@@ -20,9 +20,8 @@ import Dashboard from './components/TrendingProduct/Dashboard/Dashboard'
 import TopSelling from './components/TopSelling/TopSelling'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
-// import Cart from './components/TrendingProduct/Dashboard/Cart'
-// import ContextProvider from './components/TrendingProduct/CartFeatures/CartContextProvider'
-import CartPage from './components/TrendingProduct/CartFeatures/CartPage'
+import Cart from './components/TrendingProduct/CartFeatures/Cart'
+
 
 const App = () => {
   const location = typeof window !== 'undefined' ? window.location : { pathname: '/' };
@@ -74,7 +73,7 @@ const App = () => {
           <Route path='/TopSelling' element={<TopSelling/>}/>  
           <Route path='/Login' element={<Login/>}/>  
           <Route path='/Register' element={<Register/>}/> 
-          <Route path='/CartPage' element={<CartPage/>}/>  
+          <Route path='/Cart' element={<Cart/>}/>  
         </Routes> 
       </Router>
     </div>

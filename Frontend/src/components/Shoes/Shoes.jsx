@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
+import { CartContext } from "../TrendingProduct/Features/ContextProvider";
 
 const Shoes = () => {
+  const {dispatch} = useContext(CartContext)
   const [shoes, setShoes] = useState([]);
 
   useEffect(() => {
@@ -61,8 +63,9 @@ const Shoes = () => {
                 </div>
                 <div>
                   <button className="bg-gradient-to-r from-green-500 to-green-700 
-                  hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer">
-                    <p>Add to Cart</p>
+                  hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
+                  onClick={() => dispatch({type: "Add", shoes:shoes})}>
+                    Add to Cart
                   </button>
                 </div>
               </div>
