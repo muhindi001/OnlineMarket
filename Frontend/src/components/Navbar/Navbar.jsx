@@ -90,17 +90,21 @@ const Navbar = () => {
                 absolute top-1/2 -translate-y-1/2 right-3'/>
             </div>
             {/* order button */}
-            <button
-              className='bg-gradient-to-r from-primary to-secondary transition-allduration-200
-              text-white px-4 py-1 rounded-full flex items-center gap-3 group'
-            >
-              <span className='group-hover:block hidden transition-all duration-200'>
-                Cart
-              </span>
-              <a href="/Cart">
-              <FaCartShopping className='text-xl text-white drop-shadow-sm cursor-pointer '/>{cart.length}
-              </a>
-            </button>
+            <button className="relative bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full flex items-center gap-3 group">
+  <a href="/Cart" className="relative flex items-center">
+    <FaCartShopping className="text-2xl drop-shadow-sm cursor-pointer text-gray-50" />
+    {/* Badge */}
+    {cart.length > 0 && (
+      <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-lg">
+        {cart.length}
+      </span>
+    )}
+  </a>
+  <span className="hidden group-hover:block transition-all duration-200">
+    Cart
+  </span>
+  </button>
+            
             {/* darkmode switch */}
             <div>
               <DarkMode/>
