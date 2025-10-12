@@ -8,9 +8,8 @@ const Cart = () => {
     <div className='container mx-auto'>
       <div className="row">
         <div className="col-8">
-          
           {cart.map(p =>(
-            <CartProduct shoes={p}></CartProduct>
+            <CartProduct shoes={p}></CartProduct>           
           ))}
         </div>
         <div className="col-4">
