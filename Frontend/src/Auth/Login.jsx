@@ -1,7 +1,8 @@
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaLock } from 'react-icons/fa';
+import { IoPerson } from 'react-icons/io5';
 
 const Login = () => {
   const [loading, setLoading] = React.useState(false);
@@ -55,19 +56,33 @@ const Login = () => {
         </div>
           <div className="mb-2">
             <label className="block mb-1 font-medium">Email or Username</label>
-            <input
-              type="text"
-              name="identifier"
-              value={form.identifier}
-              onChange={handleChange}
-              required
-              className="w-full px-3 py-1 border rounded"
-              placeholder="Enter your email or username"
-            />
+            <div className="relative">
+              <IoPerson className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                name="identifier"
+                value={form.identifier}
+                onChange={handleChange}
+                required
+                className="w-full pl-10 pr-3 py-1 border rounded"
+                placeholder="Enter your email or username"
+              />
+            </div>
           </div>
         <div className="mb-2">
           <label className="block mb-1 font-medium">Password</label>
-          <input type="password" name="password" value={form.password} onChange={handleChange} required className="w-full px-3 py-1 border rounded" />
+          <div className="relative">
+            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <input 
+              type="password" 
+              name="password" 
+              value={form.password} 
+              onChange={handleChange} 
+              required 
+              className="w-full pl-10 pr-3 py-1 border rounded" 
+              placeholder="Enter your password"
+            />
+          </div>
         </div>
         {/* Remember box and Forgot Password link */}
         <div className="flex items-center justify-between mb-4">

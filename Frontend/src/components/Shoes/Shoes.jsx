@@ -64,7 +64,10 @@ const Shoes = () => {
                 <div>
                   <button className="bg-gradient-to-r from-green-500 to-green-700 
                   hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
-                  onClick={() => dispatch({type: "Add", shoes:shoes})}>
+                  onClick={() => {
+                    console.log("Adding shoe to cart:", data);
+                    dispatch({type: "Add", shoes:data});
+                  }}>
                     Add to Cart
                   </button>
                 </div>

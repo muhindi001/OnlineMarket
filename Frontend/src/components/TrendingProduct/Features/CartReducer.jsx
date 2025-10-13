@@ -11,7 +11,7 @@ const CartReducer = (state, action) => {
         case "Decrease":
 
         default:
-            state;
+            return state;
     }
 }
 export default CartReducer

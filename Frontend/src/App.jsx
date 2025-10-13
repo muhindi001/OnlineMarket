@@ -21,6 +21,7 @@ import TopSelling from './components/TopSelling/TopSelling'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
 import Cart from './components/TrendingProduct/CartFeatures/Cart'
+import ContextProvider from './components/TrendingProduct/Features/ContextProvider'
 
 
 const App = () => {
@@ -42,42 +43,43 @@ const App = () => {
   }, []);
 
   return (
-    <div className='bg-gray-100 dark:bg-gray-900 
-    dark:text-white duration-200'>
-      <Router>
-  {location.pathname !== '/Dashboard' && location.pathname.toLowerCase() !== '/login' &&
-  location.pathname.toLowerCase() !== '/register' &&  
-  <Navbar handleOrderPopup={handleOrderPopup}/>} 
-        <Routes>
-          <Route 
-            path='/'
-            element={
-      <>
-        <Hero handleOrderPopup={handleOrderPopup}/>
-        <Products />
-        <TopProducts handleOrderPopup={handleOrderPopup}/>
-        <Banner />
-        <Subscribe />
-        <Fashion/>
-        <Testmonials/>
-        <Footer/>
-        <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup}/>
-      </>
-            }
-          />
-          <Route path="/Shoes" element={<Shoes />} />
-          <Route path="/Kids_Wear" element={<Kids_Wear />} /> 
-          <Route path="/Mens_Wear" element={<Mens_Wear />} />
-          <Route path="/Electronics" element={<Electronics />} /> 
-          <Route path='/Dashboard' element={<Dashboard/>}/> 
-          <Route path='/TopSelling' element={<TopSelling/>}/>  
-          <Route path='/Login' element={<Login/>}/>  
-          <Route path='/Register' element={<Register/>}/> 
-          <Route path='/Cart' element={<Cart/>}/>  
-        </Routes> 
-      </Router>
-    </div>
-    
+    <ContextProvider>
+      <div className='bg-gray-100 dark:bg-gray-900 
+      dark:text-white duration-200'>
+        <Router>
+    {location.pathname !== '/Dashboard' && location.pathname.toLowerCase() !== '/login' &&
+    location.pathname.toLowerCase() !== '/register' &&  
+    <Navbar handleOrderPopup={handleOrderPopup}/>} 
+          <Routes>
+            <Route 
+              path='/'
+              element={
+        <>
+          <Hero handleOrderPopup={handleOrderPopup}/>
+          <Products />
+          <TopProducts handleOrderPopup={handleOrderPopup}/>
+          <Banner />
+          <Subscribe />
+          <Fashion/>
+          <Testmonials/>
+          <Footer/>
+          <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup}/>
+        </>
+              }
+            />
+            <Route path="/Shoes" element={<Shoes />} />
+            <Route path="/Kids_Wear" element={<Kids_Wear />} /> 
+            <Route path="/Mens_Wear" element={<Mens_Wear />} />
+            <Route path="/Electronics" element={<Electronics />} /> 
+            <Route path='/Dashboard' element={<Dashboard/>}/> 
+            <Route path='/TopSelling' element={<TopSelling/>}/>  
+            <Route path='/Login' element={<Login/>}/>  
+            <Route path='/Register' element={<Register/>}/> 
+            <Route path='/Cart' element={<Cart/>}/>  
+          </Routes> 
+        </Router>
+      </div>
+    </ContextProvider>
   )  
 }
 export default App

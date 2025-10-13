@@ -92,41 +92,44 @@ const Testmonials = () => {
         Officia nisi ratione neque quasi exercitationem. Quia quaerat 
         </p>
         </div>
-        {/* Testimonial slider with 3 cards per slide */}
+        {/* Testimonial slider with 2 cards per slide */}
         <div data-aos='zoom-in'>
           <Slider
             dots={true}
             arrows={false}
             infinite={true}
             speed={500}
-            slidesToShow={3}
+            slidesToShow={2}
             slidesToScroll={1}
             autoplay={true}
-            autoplaySpeed={2500}
+            autoplaySpeed={3000}
             cssEase='linear'
             pauseOnHover={true}
             pauseOnFocus={true}
+            centerMode={false}
+            centerPadding="0px"
             responsive={[{
-              breakpoint: 1024,
-              settings: { slidesToShow: 2 }
-            }, {
-              breakpoint: 640,
-              settings: { slidesToShow: 1 }
+              breakpoint: 768,
+              settings: { 
+                slidesToShow: 1,
+                centerMode: false,
+                centerPadding: "0px"
+              }
             }]}
           >
             {TestimonialData.map((data) => (
               <div
                 key={data.id}
-                className='flex flex-col items-center gap-8 shadow-xl py-8 px-6 rounded-2xl border border-gray-200 bg-white
-                 dark:bg-gray-900 relative transition-transform duration-200 hover:scale-105 mx-8 min-h-[200px] max-h-[200px] w-[200px] flex-shrink-0'
+                className='flex flex-col items-center gap-6 shadow-xl py-6 px-4 rounded-2xl border border-gray-200 bg-white
+                 dark:bg-gray-900 relative transition-transform duration-200 hover:scale-105 mx-4 min-h-[180px] w-[280px] flex-shrink-0'
               >
-                <div className='mb-4'>
-                  <img src={data.img} alt="" className='w-20 h-20 rounded-full border-4 border-primary shadow-md object-cover' />
+                <div className='mb-3'>
+                  <img src={data.img} alt="" className='w-16 h-16 rounded-full border-3 border-primary shadow-md object-cover' />
                 </div>
-                <div className='flex flex-col gap-4 items-center'>
+                <div className='flex flex-col gap-3 items-center text-center'>
                   <div className='space-y-2'>
-                    <p className='text-base italic text-gray-600 dark:text-gray-300 mb-2'>{data.text}</p>
-                    <h1 className='text-lg font-semibold text-primary dark:text-white'>{data.name}</h1>
+                    <p className='text-sm italic text-gray-600 dark:text-gray-300 leading-relaxed'>{data.text}</p>
+                    <h1 className='text-base font-semibold text-primary dark:text-white'>{data.name}</h1>
                   </div>
                 </div>
                 <p className='text-primary/20 text-7xl font-serif absolute top-2 right-6 dark:text-primary/40'>

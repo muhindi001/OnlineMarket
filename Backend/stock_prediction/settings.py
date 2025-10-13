@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'PaymentMethod',
     'Dashboard',
@@ -125,6 +126,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Use custom user model
 AUTH_USER_MODEL = 'Accounts.User'
+
+APPEND_SLASH = False
 
 
 # Internationalization

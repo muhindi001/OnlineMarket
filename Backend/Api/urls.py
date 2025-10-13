@@ -3,9 +3,11 @@ from OnlineMarketApp import views as online_views
 from Accounts import views as UserViews
 from rest_framework_simplejwt.views import TokenRefreshView
 from Accounts.serializers import CustomTokenObtainPairSerializer
-from rest_framework_simplejwt.views import TokenObtainPairView
+# from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.views import TokenObtainPairView as BaseTokenObtainPairView
-from rest_framework_simplejwt.views import TokenRefreshView
+# from rest_framework_simplejwt.views import TokenRefreshView
+from Accounts.views import LogoutView
+
 
 class CustomTokenObtainPairView(BaseTokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
@@ -13,6 +15,7 @@ class CustomTokenObtainPairView(BaseTokenObtainPairView):
 # Define your API endpoints here
 urlpatterns = [
     path('register/', UserViews.RegisterView.as_view()),
+    path('logout/', LogoutView.as_view(), name='logout'),
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('shoes/', online_views.ShoesListView.as_view(), name='shoes-list'),

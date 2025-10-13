@@ -1,14 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import profileImg from '../../../assets/profile/profile.jpg';
 import homeimg from '../../../assets/home.png'
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { LuLogOut } from "react-icons/lu";
 
 const sidebarMenu = [
   { title: 'Dashboard', icon: '🏠' },
   { title: 'My Cart', icon: '🛒' },
   { title: 'Trending Product', icon: '🔥' },
   { title: 'Setting', icon: '⚙️' },
-  { title: 'Logout', icon: '🚪' },
 ];
 
 const cards = [
@@ -18,19 +19,82 @@ const cards = [
 ];
 
 const Dashboard = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      // Call logout endpoint
+      try {
+        await fetch('http://127.0.0.1:8000/api/v1/api/logout/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        console.log('Logout API call successful');
+      } catch (apiError) {
+        console.warn('Logout API call failed, but continuing with local logout:', apiError);
+      }
+      
+      // Clear tokens from localStorage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      
+      // Redirect to login page
+      navigate('/Login');
+      
+      console.log('User logged out successfully');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Even if there's an error, clear local tokens and redirect
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      navigate('/Login');
+    }
+  };
+
+  const handleMenuClick = (item) => {
+    if (item.title === 'Logout') {
+      handleLogout();
+    } else if (item.title === 'My Cart') {
+      navigate('/Cart');
+    } else if (item.title === 'Trending Product') {
+      navigate('/#products');
+    } else if (item.title === 'Setting') {
+      // You can add settings page navigation here
+      console.log('Settings clicked');
+    }
+    // Dashboard is already active, no navigation needed
+  };
+
   return (
     <div className="min-h-screen flex bg-gray-50 dark:bg-gray-700">
       {/* Left Sidebar */}
       <aside className="w-64 bg-white border-r flex flex-col py-8 px-4 shadow-lg min-h-screen">
-        {/* Profile image and user info removed from sidebar */}
-        <nav className="flex flex-col gap-2 w-full">
+        {/* Main Navigation */}
+        <nav className="flex flex-col gap-2 w-full flex-1">
           {sidebarMenu.map((item, idx) => (
-            <button key={idx} className={`flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition w-full text-left ${idx === 0 ? 'bg-blue-100' : ''}`}>
+            <button 
+              key={idx} 
+              onClick={() => handleMenuClick(item)}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-blue-50 text-gray-700 font-medium transition w-full text-left cursor-pointer ${idx === 0 ? 'bg-blue-100' : ''}`}
+            >
               <span className="text-xl">{item.icon}</span>
               <span className="text-base font-semibold">{item.title}</span>
             </button>
           ))}
         </nav>
+        
+        {/* Logout Button - Separated at bottom */}
+        <div className="mt-auto pt-4 border-t border-gray-200">
+          <button 
+            onClick={handleLogout}
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 text-red-600 font-medium transition w-full text-left cursor-pointer border border-red-200 hover:border-red-300"
+          >
+            <span className="text-xl"><LuLogOut /></span>
+            <span className="text-base font-semibold">Logout</span>
+          </button>
+        </div>
       </aside>
       {/* Main Content */}
       <main className="flex-1 p-8">

@@ -4,13 +4,18 @@ import CartProduct from './CartProduct'
 
 const Cart = () => {
   const {cart} = useContext(CartContext)
+  console.log("Cart component - cart state:", cart);
   return (
     <div className='container mx-auto'>
       <div className="row">
         <div className="col-8">
-          {cart.map(p =>(
-            <CartProduct shoes={p}></CartProduct>           
-          ))}
+          {cart.length === 0 ? (
+            <p>Your cart is empty</p>
+          ) : (
+            cart.map((p, index) =>(
+              <CartProduct key={index} shoes={p}></CartProduct>           
+            ))
+          )}
         </div>
         <div className="col-4">
 
