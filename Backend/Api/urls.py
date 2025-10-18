@@ -26,4 +26,5 @@ urlpatterns = [
     path('fashion/', online_views.FashionListView.as_view(), name='fashion-list'),
     path('hero/', online_views.HeroListView.as_view(), name='hero-list'),
     path('top_products/', online_views.TopProductsListView.as_view(), name='top-products-list'),
+    path('product/', online_views.ProductListView.as_view(), name='product-list'),
 ]

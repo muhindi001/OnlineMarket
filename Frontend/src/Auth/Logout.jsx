@@ -42,7 +42,7 @@ const Logout = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">
         <div className="mb-6">
-          <FaSignOutAlt className="mx-auto text-4xl text-gray-400 mb-4" />
+          <FaSignOutAlt className="mx-auto text-4xl text-gray-700 mb-4" />
           <h2 className="text-2xl font-bold mb-2">Logout</h2>
           <p className="text-gray-600">Are you sure you want to logout?</p>
         </div>

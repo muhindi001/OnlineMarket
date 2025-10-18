@@ -3,17 +3,16 @@ import { CartContext } from '../Features/ContextProvider'
 import CartProduct from './CartProduct'
 
 const Cart = () => {
-  const {cart} = useContext(CartContext)
-  console.log("Cart component - cart state:", cart);
+  const {data} = useContext(CartContext)
   return (
     <div className='container mx-auto'>
       <div className="row">
         <div className="col-8">
-          {cart.length === 0 ? (
+          {data.length === 0 ? (
             <p>Your cart is empty</p>
           ) : (
-            cart.map((p, index) =>(
-              <CartProduct key={index} shoes={p}></CartProduct>           
+            data.map((shoes) =>(
+              <CartProduct key={shoes.id}></CartProduct>           
             ))
           )}
         </div>

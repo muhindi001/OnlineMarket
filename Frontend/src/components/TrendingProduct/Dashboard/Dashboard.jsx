@@ -89,9 +89,9 @@ const Dashboard = () => {
         <div className="mt-auto pt-4 border-t border-gray-200">
           <button 
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-50 text-red-600 font-medium transition w-full text-left cursor-pointer border border-red-200 hover:border-red-300"
+            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-red-300 text-red-600 font-medium transition w-full text-left cursor-pointer border border-red-200 hover:border-red-300"
           >
-            <span className="text-xl"><LuLogOut /></span>
+            <span className="text-xl text-black"><LuLogOut /></span>
             <span className="text-base font-semibold">Logout</span>
           </button>
         </div>

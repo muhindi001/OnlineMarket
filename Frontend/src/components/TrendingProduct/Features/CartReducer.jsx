@@ -1,17 +1,24 @@
-
+// CartReducer.jsx
 const CartReducer = (state, action) => {
-    switch(action.type){
-        case "Add":
-            return [...state, action.shoes]
+    // console.log('CartReducer action:', action);
+  switch (action.type) {
+    case "Add":
+      // Check if item already exists
+      const existingItem = state.find((item) => item.id === action.shoes.id);
+      if (existingItem) {
+        return state; // prevent duplicates (optional)
+      }
+      return [...state, action.shoes];
 
-        case "Remove":
+    case "Remove":
+      return state.filter((item) => item.id !== action.id);
 
-        case "Increase":
+    case "Clear":
+      return [];
 
-        case "Decrease":
+    default:
+      return state;
+  }
+};
 
-        default:
-            return state;
-    }
-}
-export default CartReducer
+export default CartReducer;

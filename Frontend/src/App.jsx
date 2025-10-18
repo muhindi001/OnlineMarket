@@ -43,6 +43,7 @@ const App = () => {
   }, []);
 
   return (
+    <React.StrictMode>
     <ContextProvider>
       <div className='bg-gray-100 dark:bg-gray-900 
       dark:text-white duration-200'>
@@ -75,11 +76,12 @@ const App = () => {
             <Route path='/TopSelling' element={<TopSelling/>}/>  
             <Route path='/Login' element={<Login/>}/>  
             <Route path='/Register' element={<Register/>}/> 
-            <Route path='/Cart' element={<Cart/>}/>  
+            <Route path='/Cart' element={<Cart/>}/> 
           </Routes> 
         </Router>
       </div>
     </ContextProvider>
+    </React.StrictMode>
   )  
 }
 export default App

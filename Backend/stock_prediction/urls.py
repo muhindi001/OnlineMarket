@@ -33,5 +33,6 @@ urlpatterns = [
     path('api/v1/fashion/', include('Api.urls')),
     path('api/v1/hero/', include('Api.urls')),
     path('api/v1/top_products/', include('Api.urls')),
+    path('api/v1/product/', include('Api.urls')),
 ]
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

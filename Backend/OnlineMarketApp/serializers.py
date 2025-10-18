@@ -196,3 +196,12 @@ class TopProductsSerializer(serializers.ModelSerializer):
         if obj.img and hasattr(obj.img, 'url'):
             return request.build_absolute_uri(obj.img.url) if request else obj.img.url
         return None
+
+from rest_framework import serializers
+from .models import Product
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+        read_only_fields = ['id']  # id is auto-generated

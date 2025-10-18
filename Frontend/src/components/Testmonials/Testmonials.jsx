@@ -12,31 +12,31 @@ const TestimonialData = [
   },
   {
     id: 2,
-    name: "Muhindi",
+    name: "Joseph",
     text: "Lorem ipsum dolor sit amet, consectetur",
     img: "https://picsum.photos/202/202"
   },
   {
     id: 3,
-    name: "Muhindi",
+    name: "Daniel",
     text: "Lorem ipsum dolor sit amet, consectetur",
     img: "https://picsum.photos/303/303"
   },
   {
     id: 4,
-    name: "Muhindi",
+    name: "Geoge",
     text: "Lorem ipsum dolor sit amet, consectetu",
     img: "https://picsum.photos/404/404"
   },
   {
     id: 5,
-    name: "Muhindi",
+    name: "Kelvin",
     text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
     img: "https://picsum.photos/505/505"
   },
   {
     id: 6,
-    name: "Muhindi",
+    name: "Yakaria",
     text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit",
     img: "https://picsum.photos/300/200"
   },

@@ -4,6 +4,10 @@ from rest_framework import permissions
 from rest_framework import status
 from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts
 from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
+from OnlineMarketApp.models import Product
+from .serializers import ProductSerializer
 
 # create your views here
 class ShoesListView(APIView):
@@ -133,3 +137,17 @@ class TopProductsListView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+
+class ProductListView(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+
+    # You can filter by these exact model fields
+    filterset_fields = ['cost', 'rating', 'cart']
+    
+    # Search by these fields (text-based)
+    search_fields = ['title', 'description']
+    
+    # Allow sorting by cost, title, and rating
+    ordering_fields = ['cost', 'title', 'rating']
