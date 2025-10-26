@@ -1,0 +1,46 @@
+<!-- {% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+<h1 style="margin-bottom:20px;">Admin Dashboard</h1>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+  <div style="background:#4CAF50; color:white; padding:20px; border-radius:10px; flex:1;">
+    <h2>{{ total_users }}</h2>
+    <p>Total Users</p>
+  </div>
+  <div style="background:#2196F3; color:white; padding:20px; border-radius:10px; flex:1;">
+    <h2>{{ total_products }}</h2>
+    <p>Total Products</p>
+  </div>
+  <div style="background:#FF9800; color:white; padding:20px; border-radius:10px; flex:1;">
+    <h2>{{ total_orders }}</h2>
+    <p>Total Orders</p>
+  </div>
+</div>
+
+<canvas id="ordersChart" style="margin-top:40px; width:100%; max-width:700px;"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('ordersChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      datasets: [{
+        label: 'Orders per day',
+        data: {{ orders_per_day|safe }},
+        borderWidth: 1,
+        backgroundColor: '#2196F3'
+      }]
+    },
+    options: {
+      scales: {
+        y: { beginAtZero: true }
+      }
+    }
+  });
+</script>
+
+{% endblock %} -->

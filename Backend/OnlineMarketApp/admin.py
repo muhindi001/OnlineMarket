@@ -31,4 +31,6 @@ class HeroAdmin(admin.ModelAdmin):
 
 @admin.register(TopProducts)
 class TopProductsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'cart', 'description')        
+    list_display = ('id', 'title', 'cart', 'description')  
+
+      

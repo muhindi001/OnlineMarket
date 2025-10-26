@@ -22,6 +22,7 @@ import Login from './Auth/Login'
 import Register from './Auth/Register'
 import Cart from './components/TrendingProduct/CartFeatures/Cart'
 import ContextProvider from './components/TrendingProduct/Features/ContextProvider'
+import ForgotPassword from './Auth/ForgotPassword'
 
 
 const App = () => {
@@ -48,7 +49,7 @@ const App = () => {
       <div className='bg-gray-100 dark:bg-gray-900 
       dark:text-white duration-200'>
         <Router>
-    {location.pathname !== '/Dashboard' && location.pathname.toLowerCase() !== '/login' &&
+    {location.pathname !== '/Dashboard' && location.pathname.toLowerCase() !== '/login' && location.pathname !== '/ForgotPassword' &&
     location.pathname.toLowerCase() !== '/register' &&  
     <Navbar handleOrderPopup={handleOrderPopup}/>} 
           <Routes>
@@ -75,7 +76,8 @@ const App = () => {
             <Route path='/Dashboard' element={<Dashboard/>}/> 
             <Route path='/TopSelling' element={<TopSelling/>}/>  
             <Route path='/Login' element={<Login/>}/>  
-            <Route path='/Register' element={<Register/>}/> 
+            <Route path='/Register' element={<Register/>}/>
+            <Route path='/ForgotPassword' element={<ForgotPassword/>}/> 
             <Route path='/Cart' element={<Cart/>}/> 
           </Routes> 
         </Router>

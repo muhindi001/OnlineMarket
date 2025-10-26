@@ -97,8 +97,6 @@ class Product(models.Model):
     cart = models.BooleanField(default=False)
     aosDelay = models.IntegerField(default=0)
 
-    # Optional old fields (you can remove if not needed)
-    description = models.TextField(blank=True)
-
     def __str__(self):
         return self.title
+

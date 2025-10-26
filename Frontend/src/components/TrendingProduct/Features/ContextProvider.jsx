@@ -5,11 +5,10 @@ import CartReducer from './CartReducer'
 export const CartContext = createContext()
 
 const ContextProvider = ({ children }) => {
-  const [data, dispatch] = useReducer(CartReducer, [])
-  // console.log('ContextProvider mounted, initial cart:', cart) // temp log
+  const [cart, dispatch] = useReducer(CartReducer, [])
 
   return (
-    <CartContext.Provider value={{ data, dispatch }}>
+    <CartContext.Provider value={{ cart, dispatch }}>
       {children}
     </CartContext.Provider>
   )

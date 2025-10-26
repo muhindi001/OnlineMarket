@@ -1,14 +1,13 @@
 // CartReducer.jsx
 const CartReducer = (state, action) => {
-    // console.log('CartReducer action:', action);
   switch (action.type) {
     case "Add":
       // Check if item already exists
-      const existingItem = state.find((item) => item.id === action.shoes.id);
+      const existingItem = state.find((item) => item.id === action.payload.id);
       if (existingItem) {
         return state; // prevent duplicates (optional)
       }
-      return [...state, action.shoes];
+      return [...state, action.payload];
 
     case "Remove":
       return state.filter((item) => item.id !== action.id);

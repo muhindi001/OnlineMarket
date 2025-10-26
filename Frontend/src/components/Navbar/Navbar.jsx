@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom'; // ✅ added
 import Logo from '../../assets/logo.png';
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from 'react-icons/fa6';
@@ -21,16 +22,36 @@ const DropdownLinks = [
 ];
 
 const Navbar = () => {
-  const { data } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
+  const location = useLocation(); // ✅ to detect which page user is on
 
+
+
+  // ✅ Smart search handler
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
+
+    // detect current page (like /Shoes, /Kids_Wear, /Mens_Wear, /Electronics)
+    const currentPath = location.pathname.toLowerCase();
+
+    // map page to backend filter
+    let filterField = '';
+    if (currentPath.includes('shoes')) filterField = 'shoes';
+    else if (currentPath.includes('kids_wear')) filterField = 'kids_wear';
+    else if (currentPath.includes('mens_wear')) filterField = 'mens_wear';
+    else if (currentPath.includes('electronics')) filterField = 'electronics';
+
+    // build API URL
+    let url = `http://127.0.0.1:8000/api/v1/product/?type=${filterField}&search=${searchTerm}`;
+    if (filterField) url += `&type=${filterField}`; // backend should filter by type
+
     try {
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/product/?search=${searchTerm}`);
+      const response = await fetch(url);
       const data = await response.json();
+      console.log("Search results:", data);
       setResults(data);
       setShowResults(true);
     } catch (error) {
@@ -101,9 +122,9 @@ const Navbar = () => {
             <button className="relative bg-gradient-to-r from-primary to-secondary text-white px-4 py-2 rounded-full flex items-center gap-3 group">
               <a href="/Cart" className="relative flex items-center">
                 <FaCartShopping className="text-2xl drop-shadow-sm cursor-pointer text-gray-50" />
-                {data.length > 0 && (
+                {cart.length > 0 && (
                   <span className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-lg">
-                    {data.length}
+                    {cart.length}
                   </span>
                 )}
               </a>

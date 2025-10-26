@@ -2,12 +2,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import status
-from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts
-from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer
-from rest_framework import generics, filters
-from django_filters.rest_framework import DjangoFilterBackend
-from OnlineMarketApp.models import Product
-from .serializers import ProductSerializer
+from rest_framework.generics import ListAPIView
+# from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product
+from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer, ProductSerializer
 
 # create your views here
 class ShoesListView(APIView):
@@ -138,16 +137,19 @@ class TopProductsListView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
-class ProductListView(generics.ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ProductSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
 
-    # You can filter by these exact model fields
-    filterset_fields = ['cost', 'rating', 'cart']
-    
-    # Search by these fields (text-based)
-    search_fields = ['title', 'description']
-    
-    # Allow sorting by cost, title, and rating
-    ordering_fields = ['cost', 'title', 'rating']
+
+class ProductListView(ListAPIView):
+    serializer_class = ProductSerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        search = self.request.GET.get('search', '').strip()
+        page_type = self.request.GET.get('type', '').strip().lower()
+        queryset = Product.objects.all()
+        if page_type:
+            queryset = queryset.filter(title__iexact=page_type)
+        if search:
+            queryset = queryset.filter(title__icontains=search)
+        return queryset
+

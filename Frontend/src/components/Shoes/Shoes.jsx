@@ -66,8 +66,8 @@ const Shoes = () => {
                   hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
                   onClick={() => {
                     console.log("Adding shoe to cart:", data);
-                    dispatch({type: "Add", shoes:data});
-                  }}>
+                    dispatch({type: "Add",  payload: data});
+                  }}> 
                     Add to Cart
                   </button>
                 </div>

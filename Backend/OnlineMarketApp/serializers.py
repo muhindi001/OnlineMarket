@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts
+from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product
 
 # Shoes Serializer
 class ShoesSerializer(serializers.ModelSerializer):
@@ -197,11 +197,8 @@ class TopProductsSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.img.url) if request else obj.img.url
         return None
 
-from rest_framework import serializers
-from .models import Product
-
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-        read_only_fields = ['id']  # id is auto-generated
+    img = serializers.SerializerMethodField()

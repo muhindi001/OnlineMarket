@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaSpinner, FaLock } from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
+import { IoPersonCircle } from "react-icons/io5";
 
 const Login = () => {
   const [loading, setLoading] = React.useState(false);
@@ -31,9 +32,18 @@ const Login = () => {
       const response = await axios.post('http://127.0.0.1:8000/api/v1/token/', userData);
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
+
+      // fetch user info
+const token = localStorage.getItem('access_token');
+const userInfo = await axios.get('http://127.0.0.1:8000/api/v1/admin/', {
+  headers: { Authorization: `Bearer ${token}` }
+});
+if (userInfo.data.is_staff) {
+  window.location.href = 'http://127.0.0.1:8000/admin/';
+} else { 
+  navigate('/Dashboard');
+}
       console.log('Login successful');
-      // If login is successful, navigate to dashboard or home
-      navigate('/Dashboard');
     } catch (error) {
       let errorMsg = 'Login failed. Please check your email/username and password.';
       if (error.response && error.response.data) {
@@ -48,11 +58,14 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-500">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div className="flex justify-center mb-6">
+  <IoPersonCircle className="text-primary text-6xl" />
+</div>
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <div className='flex justify-center mb-4 text-sm text-gray-600'>
-            <p>Already have an account login here</p>
+            {/* <p>Already have an account login here</p> */}
         </div>
           <div className="mb-2">
             <label className="block mb-1 font-medium">Email or Username</label>
@@ -89,7 +102,7 @@ const Login = () => {
           <label className="flex items-center text-sm">
             <input type="checkbox" className="mr-2" /> Remember me
           </label>
-          <a href="/#ForgotPassword" className="text-primary text-sm font-semibold hover:underline">Forgot Password?</a>
+          <a href="/ForgotPassword" className="text-primary text-sm font-semibold hover:underline">Forgot Password?</a>
         </div>
         <button type="submit" className="w-full bg-primary text-white py-2 rounded hover:bg-secondary transition font-bold" disabled={loading}>
           {loading ? <FaSpinner className="animate-spin inline-block mr-2" /> : 'Login'}

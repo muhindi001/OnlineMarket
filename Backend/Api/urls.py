@@ -3,10 +3,10 @@ from OnlineMarketApp import views as online_views
 from Accounts import views as UserViews
 from rest_framework_simplejwt.views import TokenRefreshView
 from Accounts.serializers import CustomTokenObtainPairSerializer
-# from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.views import TokenObtainPairView as BaseTokenObtainPairView
-# from rest_framework_simplejwt.views import TokenRefreshView
 from Accounts.views import LogoutView
+from Accounts.views import UserProfileView
+
 
 
 class CustomTokenObtainPairView(BaseTokenObtainPairView):
@@ -17,6 +17,7 @@ urlpatterns = [
     path('register/', UserViews.RegisterView.as_view()),
     path('logout/', LogoutView.as_view(), name='logout'),
     path('token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('admin/', UserProfileView.as_view(), name='admin'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('shoes/', online_views.ShoesListView.as_view(), name='shoes-list'),
     path('kids_wear/', online_views.KidsWearListView.as_view(), name='kids-wear-list'),

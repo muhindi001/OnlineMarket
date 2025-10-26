@@ -18,9 +18,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+from django.shortcuts import redirect
+
+
 
 urlpatterns = [
+    path('admin/logout/', auth_views.LogoutView.as_view(next_page='http://localhost:5173/Login'), name='admin_logout'),
     path('admin/', admin.site.urls),
+    path('admin/login/', lambda r: redirect('http://localhost:5173/Login')),
+    
+    
 
     # Base API Endpoints
     path('api/v1/', include('Api.urls')),

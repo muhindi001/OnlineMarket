@@ -43,11 +43,11 @@ INSTALLED_APPS = [
     'PaymentMethod',
     'Dashboard',
     'OnlineMarketApp',
+    'django_filters',
     'Api',
     'Accounts',
     'rest_framework',
     'rest_framework_simplejwt',
-    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -62,12 +62,11 @@ MIDDLEWARE = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 
-# CORS_ALLOW_ALL_ORIGINS = [
-#     'http://localhost:5173/'
-# ]
-
 
 ROOT_URLCONF = 'stock_prediction.urls'
+
+LOGOUT_REDIRECT_URL = 'http://localhost:5173/Login'
+
 
 TEMPLATES = [
     {
@@ -161,7 +160,10 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ]
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
 }
 
 
