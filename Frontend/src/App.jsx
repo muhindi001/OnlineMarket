@@ -21,16 +21,35 @@ import TopSelling from './components/TopSelling/TopSelling'
 import Login from './Auth/Login'
 import Register from './Auth/Register'
 import Cart from './components/TrendingProduct/CartFeatures/Cart'
-import ContextProvider from './components/TrendingProduct/Features/ContextProvider'
+import { CartProvider } from './components/TrendingProduct/Features/ContextProvider'
 import ForgotPassword from './Auth/ForgotPassword'
+import CheckoutPage from './components/CheckoutPage/CheckoutPage'
 
 
 const App = () => {
   const location = typeof window !== 'undefined' ? window.location : { pathname: '/' };
-  const [orderPopup, setOrderPopup]= React.useState(false);
+  const [orderPopup, setOrderPopup] = React.useState(false);
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const [orders, setOrders] = React.useState(() => {
+    // Load orders from localStorage if available
+    const savedOrders = typeof window !== 'undefined' ? localStorage.getItem('orders') : null;
+    return savedOrders ? JSON.parse(savedOrders) : [];
+  });
 
-  const handleOrderPopup = () => {
+  // Save orders to localStorage whenever it changes
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('orders', JSON.stringify(orders));
+    }
+  }, [orders]);
+
+  const handleOrderPopup = (product = null) => {
+    setSelectedProduct(product);
     setOrderPopup(!orderPopup);
+  };
+
+  const addOrder = (newOrder) => {
+    setOrders(prevOrders => [newOrder, ...prevOrders]);
   };
 
   React.useEffect(() => {
@@ -45,7 +64,7 @@ const App = () => {
 
   return (
     <React.StrictMode>
-    <ContextProvider>
+    <CartProvider>
       <div className='bg-gray-100 dark:bg-gray-900 
       dark:text-white duration-200'>
         <Router>
@@ -57,15 +76,20 @@ const App = () => {
               path='/'
               element={
         <>
-          <Hero handleOrderPopup={handleOrderPopup}/>
+          <Hero handleOrderPopup={handleOrderPopup} setSelectedProduct={setSelectedProduct}/>
           <Products />
-          <TopProducts handleOrderPopup={handleOrderPopup}/>
+          <TopProducts handleOrderPopup={handleOrderPopup} setSelectedProduct={setSelectedProduct}/>
           <Banner />
           <Subscribe />
-          <Fashion/>
+          <Fashion handleOrderPopup={handleOrderPopup} setSelectedProduct={setSelectedProduct}/>
           <Testmonials/>
           <Footer/>
-          <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup}/>
+          <Popup 
+            orderPopup={orderPopup} 
+            setOrderPopup={setOrderPopup}
+            product={selectedProduct}
+            addOrder={addOrder}
+          />
         </>
               }
             />
@@ -73,16 +97,18 @@ const App = () => {
             <Route path="/Kids_Wear" element={<Kids_Wear />} /> 
             <Route path="/Mens_Wear" element={<Mens_Wear />} />
             <Route path="/Electronics" element={<Electronics />} /> 
-            <Route path='/Dashboard' element={<Dashboard/>}/> 
+            <Route path='/Dashboard' element={<Dashboard orders={orders} setOrders={setOrders}/>}/> 
             <Route path='/TopSelling' element={<TopSelling/>}/>  
             <Route path='/Login' element={<Login/>}/>  
             <Route path='/Register' element={<Register/>}/>
             <Route path='/ForgotPassword' element={<ForgotPassword/>}/> 
-            <Route path='/Cart' element={<Cart/>}/> 
+            <Route path='/Cart' element={<Cart/>}/>
+            <Route path="/checkout/payment/:method?" element={<CheckoutPage />} />
+            <Route path="*" element={<h2 className='text-center mt-20'>404 - Page Not Found</h2>} />
           </Routes> 
         </Router>
       </div>
-    </ContextProvider>
+    </CartProvider>
     </React.StrictMode>
   )  
 }

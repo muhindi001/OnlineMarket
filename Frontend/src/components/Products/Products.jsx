@@ -1,9 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../TrendingProduct/Features/ContextProvider";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const { dispatch } = useCart();
+
+  const addToCart = (product) => {
+    dispatch({ type: "Add", payload: product });
+    toast.success(`${product.title} added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   useEffect(() => {
     axios
@@ -46,12 +62,24 @@ const Products = () => {
                     e.target.src = "https://via.placeholder.com";
                   }}
                 />
-                <div>
+                <div className="p-2">
                   <h3 className="font-semibold">{item.title}</h3>
-                  <div className="flex items-center gap-1">
-                    <FaStar className="text-yellow-500" />
-                    <span>{item.rating}</span>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1">
+                      <FaStar className="text-yellow-500" />
+                      <span>{item.rating}</span>
+                    </div>
+                    <span className="font-bold">${parseFloat(item.cost || 0).toFixed(2)}</span>
                   </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addToCart(item);
+                    }}
+                    className="mt-2 w-full flex items-center justify-center gap-2 bg-primary text-white py-1 px-3 rounded-md hover:bg-primary/90 transition-colors"
+                  >
+                    <FaShoppingCart /> Add to Cart
+                  </button>
                 </div>
               </div>
             ))}

@@ -1,9 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../TrendingProduct/Features/ContextProvider";
+import { toast } from "react-toastify";
 
-const TopProducts = ({ handleOrderPopup }) => {
+const TopProducts = ({ handleOrderPopup, setSelectedProduct }) => {
   const [top_products, setHeroes] = useState([]);
+  const { dispatch } = useCart();
+
+  const addToCart = (product) => {
+    dispatch({ type: "Add", payload: product });
+    toast.success(`${product.title} added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+    });
+  };
 
   useEffect(() => {
     axios
@@ -76,17 +92,30 @@ const TopProducts = ({ handleOrderPopup }) => {
                   <FaStar className="text-yellow-500" />
                 </div>
                 <h1 className="text-xl font-bold">{item.title}</h1>
-                <p className="text-gray-500 group-hover:text-white duration-300 text-sm line-clamp-2">
+                <p className="text-gray-500 group-hover:text-white duration-300 text-sm line-clamp-2 mb-2">
                   {item.description}
                 </p>
-                <button
-                  className="bg-primary group-hover:text-primary
-                  hover:scale-105 duration-200 text-white py-2 px-4 rounded-full 
-                  cursor-pointer group-hover:bg-white"
-                  onClick={handleOrderPopup}
-                >
-                  Order Now
-                </button>
+                <div className="flex flex-col gap-2">
+                  <span className="text-lg font-bold text-primary group-hover:text-white">
+                    ${parseFloat(item.cost || 0).toFixed(2)}
+                  </span>
+                  <button
+                    onClick={() => {
+                      setSelectedProduct({
+                        id: item.id,
+                        title: item.title,
+                        price: item.cost,
+                        // Add other product details as needed
+                      });
+                      handleOrderPopup(item);
+                    }}
+                    className="flex items-center justify-center gap-2 bg-primary group-hover:text-primary
+                    hover:scale-105 duration-200 text-white py-2 px-4 rounded-full 
+                    cursor-pointer group-hover:bg-white"
+                  >
+                    <FaShoppingCart /> Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
           ))}

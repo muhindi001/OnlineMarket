@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Slider from 'react-slick'
 
-const Hero = ({ handleOrderPopup }) => {
+const Hero = ({ handleOrderPopup, setSelectedProduct }) => {
   const [hero, setHero] = useState([]);
 
   useEffect(() => {
@@ -76,9 +76,30 @@ const Hero = ({ handleOrderPopup }) => {
                     data-aos-delay="300"
                   >
                     <button
-                      onClick={handleOrderPopup}
-                      className="bg-gradient-to-r from-primary to-secondary
-                      hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
+                      onClick={() => {
+                        if (item.product) {
+                          // Use the product data from the API if available
+                          const product = {
+                            id: item.product.id || `hero-product-${item.id}`,
+                            title: item.product.title || item.title,
+                            price: item.product.price || 99.99,
+                            // Include any other product details from the API
+                            ...item.product
+                          };
+                          setSelectedProduct(product);
+                          handleOrderPopup(product);
+                        } else {
+                          // Fallback to default values if no product data
+                          const product = {
+                            id: `hero-product-${item.id}`,
+                            title: item.title,
+                            price: 99.99
+                          };
+                          setSelectedProduct(product);
+                          handleOrderPopup(product);
+                        }
+                      }}
+                      className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
                     >
                       Order Now
                     </button>

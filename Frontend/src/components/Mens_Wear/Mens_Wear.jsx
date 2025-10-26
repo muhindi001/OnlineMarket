@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+import { useCart } from "../TrendingProduct/Features/ContextProvider";
+import { toast } from "react-toastify";
 
 const MensWear = () => {
   const [mensWear, setMensWear] = useState([]);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     axios
@@ -55,12 +59,25 @@ const MensWear = () => {
                     <span>{data.rating}</span>
                   </div>
                   <div className="flex items-center font-semibold gap-1">
-                    <span>{data.cost}Tsh</span>
+                    <span>${parseFloat(data.cost).toFixed(2)}</span>
                   </div>
                 </div>
                 <div>
-                  <button className="bg-gradient-to-r from-green-500 to-green-700 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer">
-                    <p>Add to Cart</p>
+                  <button 
+                    onClick={() => {
+                      dispatch({ type: "Add", payload: data });
+                      toast.success(`${data.title} added to cart!`, {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                      });
+                    }}
+                    className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white py-1 px-4 rounded-full cursor-pointer"
+                  >
+                    <FaShoppingCart /> Add to Cart
                   </button>
                 </div>
               </div>

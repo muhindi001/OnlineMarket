@@ -23,21 +23,32 @@ const Login = () => {
     e.preventDefault();
     setErrors({});
     setLoading(true);
-    const userData = {
+    const loginData = {
       identifier: form.identifier,
       password: form.password,
     }
-    console.log('userData==>', userData);
+    console.log('loginData==>', loginData);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v1/token/', userData);
+      const response = await axios.post('http://127.0.0.1:8000/api/v1/token/', loginData);
       localStorage.setItem('access_token', response.data.access);
       localStorage.setItem('refresh_token', response.data.refresh);
 
       // fetch user info
-const token = localStorage.getItem('access_token');
-const userInfo = await axios.get('http://127.0.0.1:8000/api/v1/admin/', {
-  headers: { Authorization: `Bearer ${token}` }
-});
+      const token = localStorage.getItem('access_token');
+      const userInfo = await axios.get('http://127.0.0.1:8000/api/v1/admin/', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      // Store user data in localStorage
+      const userData = {
+        first_name: userInfo.data.first_name || '',
+        last_name: userInfo.data.last_name || '',
+        email: userInfo.data.email || '',
+        username: userInfo.data.username || '',
+        profile_image: userInfo.data.profile_image || null
+      };
+localStorage.setItem('user', JSON.stringify(userData));
+
 if (userInfo.data.is_staff) {
   window.location.href = 'http://127.0.0.1:8000/admin/';
 } else { 

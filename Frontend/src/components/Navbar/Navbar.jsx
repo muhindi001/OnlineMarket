@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom'; // ✅ added
 import Logo from '../../assets/logo.png';
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from 'react-icons/fa6';
 import DarkMode from './DarkMode';
-import { CartContext } from '../TrendingProduct/Features/ContextProvider';
+import { useCart } from '../TrendingProduct/Features/ContextProvider';
 
 const Menu = [
   { id: 1, name: 'Home', link: '/' },
@@ -22,7 +22,7 @@ const DropdownLinks = [
 ];
 
 const Navbar = () => {
-  const { cart } = useContext(CartContext);
+  const { cart } = useCart();
   const [searchTerm, setSearchTerm] = useState('');
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);

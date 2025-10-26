@@ -48,6 +48,17 @@ const Register = () => {
         },
       });
       console.log('response.data==>', response.data);
+      
+      // Store user data in localStorage
+      const userData = {
+        first_name: form.first_name,
+        last_name: form.last_name,
+        email: form.email,
+        username: form.username,
+        profile_image: response.data.profile_image || null
+      };
+      localStorage.setItem('user', JSON.stringify(userData));
+      
       console.log('User registered successfully');
       navigate('/Dashboard');
     } catch (error) {
