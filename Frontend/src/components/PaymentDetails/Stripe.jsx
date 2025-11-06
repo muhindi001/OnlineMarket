@@ -220,7 +220,7 @@ const Stripe = ({ amount, currency = 'USD', onSuccess, onError }) => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Cardholder Name */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaUser className="text-gray-500" />
             Cardholder Name <span className="text-red-500">*</span>
           </label>
@@ -246,7 +246,7 @@ const Stripe = ({ amount, currency = 'USD', onSuccess, onError }) => {
 
         {/* Card Number */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaCreditCard className="text-gray-500" />
             Card Number <span className="text-red-500">*</span>
           </label>
@@ -279,7 +279,7 @@ const Stripe = ({ amount, currency = 'USD', onSuccess, onError }) => {
         <div className="grid grid-cols-2 gap-4">
           {/* Expiry Date */}
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <FaCalendarAlt className="text-gray-500" />
               Expiry Date <span className="text-red-500">*</span>
             </label>
@@ -307,7 +307,7 @@ const Stripe = ({ amount, currency = 'USD', onSuccess, onError }) => {
 
           {/* CVC */}
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <FaLock className="text-gray-500" />
               CVC <span className="text-red-500">*</span>
             </label>
@@ -336,7 +336,7 @@ const Stripe = ({ amount, currency = 'USD', onSuccess, onError }) => {
 
         {/* Email */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaEnvelope className="text-gray-500" />
             Email for receipt <span className="text-red-500">*</span>
           </label>

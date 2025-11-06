@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
+import { useCart } from "../TrendingProduct/Features/ContextProvider";
 
 const Electronics = () => {
+  const { dispatch } = useCart()  
   const [electronics, setElectronics] = useState([]);
 
   useEffect(() => {
@@ -35,11 +37,11 @@ const Electronics = () => {
         {/* Body */}
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-5 lg:grid-cols-5 place-items-center">
-            {electronics.map((item) => (
-              <div key={item.id} data-aos="fade-up" className="space-y-3">
+            {electronics.map((data) => (
+              <div key={data.id} data-aos="fade-up" className="space-y-3">
                 <img
-                  src={item.img || "https://via.placeholder.com"}
-                  alt={item.title}
+                  src={data.img || "https://via.placeholder.com"}
+                  alt={data.title}
                   className="h-[220px] w-[180px] object-cover rounded-md"
                   onError={(e) => {
                     e.target.onerror = null;
@@ -47,16 +49,28 @@ const Electronics = () => {
                   }}
                 />
                 <div>
-                  <h3 className="font-semibold">{item.title}</h3>
+                  <h3 className="font-semibold">{data.title}</h3>
                   <div className="flex items-center gap-1">
                     <FaStar className="text-yellow-500" />
-                    <span>{item.rating}</span>
+                    <span>{data.rating}</span>
                   </div>
                   <div className="flex items-center font-semibold gap-1">
-                    <span>{item.cost}Tsh</span>
+                    <span>{data.cost}Tsh</span>
                   </div>
                 </div>
-                <button className="bg-gradient-to-r from-green-500 to-green-700 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer">
+                <button 
+                  onClick={() => {
+                    dispatch({ type: "Add", payload: data });
+                    toast.success(`${data.title} added to cart!`, {
+                      position: "top-right",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                    });
+                  }}                
+                className="bg-gradient-to-r from-green-500 to-green-700 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer">
                   Add to Cart
                 </button>
               </div>

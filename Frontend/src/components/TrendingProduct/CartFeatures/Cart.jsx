@@ -4,7 +4,7 @@ import CartProduct from './CartProduct'
 import PaymentDetails from '../../PaymentDetails/PaymentDetails'
 
 const Cart = () => {
-  const { cart, dispatch } = useCart()
+  const { cart } = useCart()
   console.log('Cart state:', cart);
   
   // Calculate total items and subtotal
@@ -49,7 +49,7 @@ const Cart = () => {
                 <div className='space-y-2'>
                   <div className='flex justify-between'>
                     <span>Subtotal ({totalItems} {totalItems === 1 ? 'item' : 'items'})</span>
-                    <span>${subtotal}</span>
+                    <span>{subtotal}Tsh</span>
                   </div>
                   <div className='flex justify-between text-sm text-gray-500'>
                     <span>Shipping</span>
@@ -64,7 +64,7 @@ const Cart = () => {
                 <div className='border-t pt-4'>
                   <div className='flex justify-between font-semibold text-lg mb-4'>
                     <span>Estimated Total</span>
-                    <span>${subtotal}</span>
+                    <span>{subtotal}Tsh</span>
                   </div>
                   
                   <button 

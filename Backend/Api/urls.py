@@ -6,7 +6,7 @@ from Accounts.serializers import CustomTokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView as BaseTokenObtainPairView
 from Accounts.views import LogoutView
 from Accounts.views import UserProfileView
-from PaymentMethod.views import process_payment
+from PaymentMethod import views as payment_views
 
 
 class CustomTokenObtainPairView(BaseTokenObtainPairView):
@@ -28,5 +28,6 @@ urlpatterns = [
     path('hero/', online_views.HeroListView.as_view(), name='hero-list'),
     path('top_products/', online_views.TopProductsListView.as_view(), name='top-products-list'),
     path('product/', online_views.ProductListView.as_view(), name='product-list'),
-    path('payment/', process_payment, name='process-payment'),    
+    path('subscribe/', online_views.SubscribeView.as_view(), name='api-subscribe'),
+    path('payment/', payment_views.process_payment, name='process-payment'),    
 ]

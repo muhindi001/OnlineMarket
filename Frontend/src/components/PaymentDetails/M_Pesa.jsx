@@ -140,7 +140,7 @@ const M_Pesa = ({ amount = 0, currency = 'TZS', onPaymentInitiated, onError }) =
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Phone Number */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaMobileAlt className="text-gray-500" />
             M-Pesa Phone Number <span className="text-red-500">*</span>
           </label>
@@ -170,7 +170,7 @@ const M_Pesa = ({ amount = 0, currency = 'TZS', onPaymentInitiated, onError }) =
 
         {/* Name (Optional) */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaUser className="text-gray-500" />
             Your Name (Optional)
           </label>
@@ -193,7 +193,7 @@ const M_Pesa = ({ amount = 0, currency = 'TZS', onPaymentInitiated, onError }) =
 
         {/* Amount */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaMoneyBillWave className="text-gray-500" />
             Amount to Pay
           </label>

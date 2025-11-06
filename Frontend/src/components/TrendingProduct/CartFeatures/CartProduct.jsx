@@ -17,7 +17,7 @@ const CartProduct = ({ item }) => {
       />
       <div className='flex-1 w-full'>
         <h3 className='font-medium text-lg'>{item.title}</h3>
-        <p className='text-gray-600'>${parseFloat(item.cost).toFixed(2)} each</p>
+        <p className='text-gray-600'>{parseFloat(item.cost).toFixed(2)}Tsh each</p>
         <p className='text-sm text-gray-500'>Rating: {item.rating} ⭐</p>
         
         {/* Quantity Controls */}
@@ -25,7 +25,7 @@ const CartProduct = ({ item }) => {
           <div className='flex items-center border rounded-md overflow-hidden'>
             <button 
               onClick={() => dispatch({ type: "DecreaseQuantity", id: item.id })}
-              className='px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors'
+              className='px-3 py-1 bg-green-500 hover:bg-green-600 transition-colors'
               disabled={(item.quantity || 1) <= 1}
             >
               <FaMinus size={12} />
@@ -33,7 +33,7 @@ const CartProduct = ({ item }) => {
             <span className='px-4 py-1 bg-white'>{item.quantity || 1}</span>
             <button 
               onClick={() => dispatch({ type: "IncreaseQuantity", id: item.id })}
-              className='px-3 py-1 bg-gray-100 hover:bg-gray-200 transition-colors'
+              className='px-3 py-1 bg-green-500 hover:bg-green-600 transition-colors'
             >
               <FaPlus size={12} />
             </button>
@@ -41,7 +41,7 @@ const CartProduct = ({ item }) => {
           
           <button
             onClick={() => dispatch({ type: "Remove", id: item.id })}
-            className='flex items-center gap-1 text-red-600 hover:text-red-700 text-sm'
+            className='flex items-center gap-1 text-red-600 hover:text-red-700 text-sm border rounded-md bg-gray-300 font-semibold cursor-pointer'
             title='Remove item'
           >
             <FaTrash size={14} />
@@ -51,7 +51,7 @@ const CartProduct = ({ item }) => {
       </div>
       
       <div className='text-right font-medium w-full md:w-auto'>
-        <p className='text-lg'>${totalPrice}</p>
+        <p className='text-lg'>{totalPrice}Tsh</p>
       </div>
     </div>
   )

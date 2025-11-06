@@ -24,6 +24,8 @@ import Cart from './components/TrendingProduct/CartFeatures/Cart'
 import { CartProvider } from './components/TrendingProduct/Features/ContextProvider'
 import ForgotPassword from './Auth/ForgotPassword'
 import CheckoutPage from './components/CheckoutPage/CheckoutPage'
+import MapLocation from './components/MapLocation/MapLocation'
+import QuickActions from './components/QuickActions/QuickActions'
 
 
 const App = () => {
@@ -69,7 +71,7 @@ const App = () => {
       dark:text-white duration-200'>
         <Router>
     {location.pathname !== '/Dashboard' && location.pathname.toLowerCase() !== '/login' && location.pathname !== '/ForgotPassword' &&
-    location.pathname.toLowerCase() !== '/register' &&  
+    location.pathname.toLowerCase() !== '/register' && location.pathname !== '/Cart' &&  
     <Navbar handleOrderPopup={handleOrderPopup}/>} 
           <Routes>
             <Route 
@@ -82,7 +84,9 @@ const App = () => {
           <Banner />
           <Subscribe />
           <Fashion handleOrderPopup={handleOrderPopup} setSelectedProduct={setSelectedProduct}/>
+          <QuickActions/>
           <Testmonials/>
+          <MapLocation/>
           <Footer/>
           <Popup 
             orderPopup={orderPopup} 

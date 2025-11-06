@@ -1,41 +1,47 @@
-# payments/views.py
-from rest_framework.decorators import api_view
+# PaymentMethod/views.py
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from .serializers import PaymentSerializer
 from .models import Payment
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
 def process_payment(request):
+    # ✅ Handle GET requests (for testing / info)
+    if request.method == 'GET':
+        return Response({"message": "Use POST to process payments"})
+
+    # ✅ Handle POST requests (actual payment logic)
     serializer = PaymentSerializer(data=request.data)
     if serializer.is_valid():
-        payment = serializer.save(status="Processing")
+        # Use the model explicitly
+        payment = Payment(**serializer.validated_data)
+        payment.status = "Processing"
+        payment.save()
 
-        # Handle each method differently
+        # Handle payment methods
         method = payment.payment_method
-
         if method == 'card':
-            # Example: integrate Stripe or custom card logic
             payment.status = "Paid"
-
         elif method == 'paypal':
-            # Redirect or call PayPal API here
             payment.status = "Pending Confirmation"
-
         elif method == 'mpesa':
-            # Call M-Pesa API (Daraja)
-            # Generate STK Push to phone_number
             payment.status = "Awaiting M-Pesa Confirmation"
-
         elif method == 'stripe':
-            # Use Stripe API to create payment intent
             payment.status = "Paid"
-
         elif method == 'bank':
-            # Manual bank transfer confirmation
             payment.status = "Awaiting Bank Verification"
 
         payment.save()
-        return Response({'message': 'Payment recorded', 'status': payment.status}, status=status.HTTP_201_CREATED)
-    
+
+        return Response({
+            "message": "Payment recorded successfully",
+            "payment_id": payment.id,
+            "status": payment.status,
+            "method": payment.payment_method
+        }, status=status.HTTP_201_CREATED)
+
+    # Return validation errors if serializer is invalid
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

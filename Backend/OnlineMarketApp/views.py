@@ -2,13 +2,40 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import status
+from django.core.mail import send_mail
 from rest_framework.generics import ListAPIView
-# from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product
-from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer, ProductSerializer
+from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product,Subscription, Notification
+from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer, ProductSerializer,SubscriptionSerializer
 
 # create your views here
+class SubscribeView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def post(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'detail': 'Email required'}, status=status.HTTP_400_BAD_REQUEST)
+        subscription, created = Subscription.objects.get_or_create(email=email)
+        if not created:
+            return Response({'detail': 'Already subscribed'}, status=status.HTTP_200_OK)
+
+        # create admin/global notification (or assign to user if authenticated)
+        Notification.objects.create(
+            message=f"New subscription: {email}",
+            data={'email': email}
+        )
+
+        # optional: send confirmation email (move to Celery for production)
+        send_mail(
+            'Thanks for subscribing',
+            'You will be notified about new products.',
+            'from@example.com',
+            [email],
+            fail_silently=True,
+        )
+        return Response(SubscriptionSerializer(subscription).data, status=status.HTTP_201_CREATED)
+
 class ShoesListView(APIView):
     permission_classes = [permissions.AllowAny]
     def get(self, request):

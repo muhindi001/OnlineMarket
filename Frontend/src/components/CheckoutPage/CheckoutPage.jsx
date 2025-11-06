@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PaymentMethodSelector from '../PaymentDetails/PaymentMethodSelector';
 
 const CheckoutPage = () => {

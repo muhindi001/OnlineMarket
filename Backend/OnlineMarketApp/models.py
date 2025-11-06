@@ -1,4 +1,24 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class Subscription(models.Model):
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)  # null for global/admin notices
+    message = models.TextField()
+    data = models.JSONField(null=True, blank=True)
+    read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.message[:40]}"
 
 class Shoes(models.Model):
     id = models.AutoField(primary_key=True)

@@ -1,6 +1,6 @@
 # payments/models.py
 from django.db import models
-from .models import Payment
+# from .models import Payment
 
 
 class Payment(models.Model):

@@ -68,7 +68,7 @@ const CreditDebitCard = ({ onSubmit }) => {
 
       {/* Cardholder Name */}
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+        <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
           <FaUser className="text-gray-500" />
           Cardholder Name <span className="text-red-500">*</span>
         </label>
@@ -107,7 +107,7 @@ const CreditDebitCard = ({ onSubmit }) => {
       <div className="grid grid-cols-2 gap-4">
         {/* Expiry Date */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
             <FaCalendarAlt className="text-gray-500" />
             Expiry Date <span className="text-red-500">*</span>
           </label>
@@ -125,7 +125,7 @@ const CreditDebitCard = ({ onSubmit }) => {
 
         {/* CVV */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
             <FaLock className="text-gray-500" />
             CVV <span className="text-red-500">*</span>
           </label>
@@ -147,7 +147,7 @@ const CreditDebitCard = ({ onSubmit }) => {
 
       {/* Billing Address */}
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+        <label className="text-sm font-medium text-gray-700 flex items-center gap-1">
           <FaMapMarkerAlt className="text-gray-500" />
           Billing Address (optional)
         </label>

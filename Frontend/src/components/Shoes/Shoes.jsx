@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import axios from "axios";
 import { FaStar } from "react-icons/fa6";
-import { FaShoppingCart } from "react-icons/fa";
 import { useCart } from "../TrendingProduct/Features/ContextProvider";
 import { toast } from "react-toastify";
 
@@ -75,9 +74,9 @@ const Shoes = () => {
                       draggable: true,
                     });
                   }}
-                  className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white py-1 px-4 rounded-full cursor-pointer"
+                className="bg-gradient-to-r from-green-500 to-green-700 hover:scale-105 duration-200 text-white py-2 px-4 rounded-full cursor-pointer"
                 >
-                  <FaShoppingCart /> Add to Cart
+                 Add to Cart
                 </button>
               </div>
             ))}

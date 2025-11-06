@@ -76,7 +76,7 @@ const PayPal = ({ onSuccess, onError }) => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Email Field */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaEnvelope className="text-gray-500" />
             PayPal Email <span className="text-red-500">*</span>
           </label>
@@ -106,7 +106,7 @@ const PayPal = ({ onSuccess, onError }) => {
 
         {/* Country Field */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaGlobe className="text-gray-500" />
             Country
           </label>

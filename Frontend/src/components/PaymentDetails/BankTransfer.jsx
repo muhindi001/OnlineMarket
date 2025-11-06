@@ -226,7 +226,7 @@ const BankTransfer = ({ amount, currency = 'TZS', onPaymentSubmitted, onError })
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Account Holder Name */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaUser className="text-gray-500" />
             Your Full Name (as per bank account) <span className="text-red-500">*</span>
           </label>
@@ -249,7 +249,7 @@ const BankTransfer = ({ amount, currency = 'TZS', onPaymentSubmitted, onError })
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Bank Name */}
           <div className="space-y-1">
-            <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+            <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
               <FaUniversity className="text-gray-500" />
               Your Bank <span className="text-red-500">*</span>
             </label>
@@ -306,7 +306,7 @@ const BankTransfer = ({ amount, currency = 'TZS', onPaymentSubmitted, onError })
         
         {/* Transaction ID */}
         <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700 flex items-center gap-2">
+          <label className="text-sm font-medium text-gray-700 flex items-center gap-2">
             <FaFileInvoice className="text-gray-500" />
             Transaction/Reference Number <span className="text-red-500">*</span>
           </label>
