@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/v1/fashion/', include('Api.urls')),
     path('api/v1/hero/', include('Api.urls')),
     path('api/v1/top_products/', include('Api.urls')),
-    path('api/subscribe/', include('Api.urls')),
+    path('api/', include('OnlineMarketApp.urls')),
     path('api/v1/product/', include('Api.urls')),
     path('api/payment/', include('PaymentMethod.urls')),
 ]

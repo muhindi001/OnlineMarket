@@ -6,11 +6,6 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         model = Subscription
         fields = ['id', 'email', 'created_at']
 
-class NotificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Notification
-        fields = ['id', 'user', 'message', 'data', 'read', 'created_at']
-
 # Shoes Serializer
 class ShoesSerializer(serializers.ModelSerializer):
     img = serializers.SerializerMethodField()

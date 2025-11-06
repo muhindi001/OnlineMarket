@@ -28,6 +28,6 @@ urlpatterns = [
     path('hero/', online_views.HeroListView.as_view(), name='hero-list'),
     path('top_products/', online_views.TopProductsListView.as_view(), name='top-products-list'),
     path('product/', online_views.ProductListView.as_view(), name='product-list'),
-    path('subscribe/', online_views.SubscribeView.as_view(), name='api-subscribe'),
+    # path('subscribe/', online_views.SubscribeView.as_view(), name='api-subscribe'),
     path('payment/', payment_views.process_payment, name='process-payment'),    
 ]

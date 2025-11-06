@@ -16,24 +16,17 @@ class SubscribeView(APIView):
         email = request.data.get('email')
         if not email:
             return Response({'detail': 'Email required'}, status=status.HTTP_400_BAD_REQUEST)
+
         subscription, created = Subscription.objects.get_or_create(email=email)
         if not created:
             return Response({'detail': 'Already subscribed'}, status=status.HTTP_200_OK)
 
-        # create admin/global notification (or assign to user if authenticated)
-        Notification.objects.create(
-            message=f"New subscription: {email}",
-            data={'email': email}
-        )
+        # create a simple admin/global notification (optional)
+        try:
+            Notification.objects.create(message=f"New subscription: {email}", data={'email': email})
+        except Exception:
+            pass
 
-        # optional: send confirmation email (move to Celery for production)
-        send_mail(
-            'Thanks for subscribing',
-            'You will be notified about new products.',
-            'from@example.com',
-            [email],
-            fail_silently=True,
-        )
         return Response(SubscriptionSerializer(subscription).data, status=status.HTTP_201_CREATED)
 
 class ShoesListView(APIView):
