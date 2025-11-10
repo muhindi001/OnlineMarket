@@ -38,6 +38,7 @@ const Dashboard = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [user, setUser] = useState(null);
   const [activeMenu, setActiveMenu] = useState('Dashboard');
+  const [notifyCount, setNotifyCount] = useState(2);
   // Get orders from props or use empty array if not provided
   const [orders, setOrders] = useState(props.orders || []);
   
@@ -259,28 +260,32 @@ const Dashboard = (props) => {
                   className="w-6 h-6 hover:scale-105 transition-transform"
                 />
               </a>
-              <div className="flex items-center gap-2">
-                {user?.profile_image ? (
-                  <img
-                    src={user.profile_image}
-                    alt="Profile"
-                    className="w-8 h-8 rounded-full object-cover border-2 border-primary"
-                  />
-                ) : (
-                  <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
-                    {user?.first_name?.[0] || 'U'}
-                  </div>
-                )}
-                <span className="hidden md:inline text-sm font-medium">
-                  {user ? `${user.first_name} ${user.last_name}`.trim() : 'User'}
-                </span>
-              </div>
-
-              <button className="relative text-gray-600 dark:text-gray-300 hover:text-blue-600">
-                <IoMdNotificationsOutline className="text-2xl" />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">2</span>
-              </button>
-            </div>
+  <div className="flex items-center gap-2">
+    {user?.profile_image ? (
+      <img
+        src={user.profile_image}
+        alt="Profile"
+        className="w-8 h-8 rounded-full object-cover border-2 border-primary"
+      />
+    ) : (
+      <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-500">
+        {user?.first_name?.[0] || 'U'}
+      </div>
+    )}
+    <span className="hidden md:inline text-sm font-medium">
+      {user ? `${user.first_name} ${user.last_name}`.trim() : 'User'}
+    </span>
+  </div>
+  {/* notify icon */}
+  <button className="relative text-gray-600 dark:text-gray-300 hover:text-blue-600">
+    <IoMdNotificationsOutline className="text-2xl" />
+    {notifyCount > 0 && (
+      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+        {notifyCount}
+      </span>
+    )}
+  </button>
+</div>
           </div>
 
           {/* Header Title */}

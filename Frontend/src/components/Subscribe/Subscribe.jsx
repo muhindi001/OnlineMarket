@@ -23,6 +23,9 @@ const Subscribe = () => {
       await axios.post('http://127.0.0.1:8000/api/subscribe/', { email }) // adjust URL if needed
       toast.success('Subscribed — you will be notified!')
       setEmail('')
+      // Dispatch a custom event so other UI (dashboard notify icon) can update immediately
+      const eventDetail = { type: 'subscribe', message: 'New subscriber', email }
+      window.dispatchEvent(new CustomEvent('app:new-notification', { detail: eventDetail }))
     } catch (err) {
       toast.error('Subscription failed')
       console.error(err)
