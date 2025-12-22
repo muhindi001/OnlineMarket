@@ -19,7 +19,7 @@ class ElectronicsAdmin(admin.ModelAdmin):
 
 @admin.register(Products)
 class ProductsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'rating', 'aosDelay')
+    list_display = ('id', 'title', 'rating', 'price', 'cart', 'aosDelay')
 
 @admin.register(Fashion)
 class FashionAdmin(admin.ModelAdmin):
@@ -27,7 +27,7 @@ class FashionAdmin(admin.ModelAdmin):
 
 @admin.register(Hero)
 class HeroAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'description' )
+    list_display = ('id', 'title', 'price','description' )
 
 @admin.register(TopProducts)
 class TopProductsAdmin(admin.ModelAdmin):

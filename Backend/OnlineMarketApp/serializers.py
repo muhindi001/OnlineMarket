@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product, Subscription, Notification
+from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Subscription, Notification
 
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -141,7 +141,7 @@ class ProductsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Products
-        fields = ['id', 'img', 'title', 'rating', 'aosDelay'] 
+        fields = ['id', 'img', 'title', 'rating', 'price', 'cart', 'aosDelay'] 
         read_only_fields = ['id']
 
     def get_img(self, obj):
@@ -176,10 +176,9 @@ class FashionSerializer(serializers.ModelSerializer):
 
 class HeroSerializer(serializers.ModelSerializer):
     img = serializers.SerializerMethodField()
-
     class Meta:
         model = Hero
-        fields = ['id', 'img', 'title', 'description']  # matches Hero model
+        fields = ['id', 'img', 'title','price', 'description']  # matches Hero model
         read_only_fields = ['id']
 
     def get_img(self, obj):
@@ -202,8 +201,8 @@ class TopProductsSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.img.url) if request else obj.img.url
         return None
 
-class ProductSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = '__all__'
-    img = serializers.SerializerMethodField()
+# class ProductSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Products
+#         fields = '__all__'
+#     img = serializers.SerializerMethodField()

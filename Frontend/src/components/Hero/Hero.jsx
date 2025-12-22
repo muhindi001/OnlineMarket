@@ -82,7 +82,7 @@ const Hero = ({ handleOrderPopup, setSelectedProduct }) => {
                           const product = {
                             id: item.product.id || `hero-product-${item.id}`,
                             title: item.product.title || item.title,
-                            price: item.product.price || 99.99,
+                            price: item.product.price || item.price,
                             // Include any other product details from the API
                             ...item.product
                           };

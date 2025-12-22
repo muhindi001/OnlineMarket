@@ -66,7 +66,7 @@ const Popup = ({ orderPopup, setOrderPopup, product, addOrder }) => {
                 <div className='mb-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-md'>
                   <h3 className='font-medium'>{product.title}</h3>
                   <p className='text-sm text-gray-600 dark:text-gray-400'>
-                    Price: ${product.price}
+                    Price: {product.price}Tsh
                   </p>
                 </div>
               )}
@@ -112,7 +112,7 @@ const Popup = ({ orderPopup, setOrderPopup, product, addOrder }) => {
                       type='submit'
                       className='w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white font-medium py-2 px-6 rounded-lg transition-all duration-200 flex items-center justify-center'
                     >
-                      Place Order
+                      Order Now
                     </button>
                   </div>
                 </div>

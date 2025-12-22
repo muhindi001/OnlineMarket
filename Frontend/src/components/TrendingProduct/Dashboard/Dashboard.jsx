@@ -209,7 +209,7 @@ const Dashboard = (props) => {
       {/* Sidebar */}
       {sidebarOpen && (
         <aside className="w-64 h-screen bg-white dark:bg-gray-800 border-r dark:border-gray-700 flex flex-col py-6 px-5 shadow-xl fixed left-0 top-0 z-10">
-        <h2 className="text-2xl font-bold text-blue-600 mb-6 text-center">MyShop</h2>
+        {/* <h2 className="text-2xl font-bold text-blue-600 mb-6 text-center">MyShop</h2> */}
         <nav className="flex flex-col gap-2 w-full flex-1">
           {sidebarMenu.map((item) => (
             <button

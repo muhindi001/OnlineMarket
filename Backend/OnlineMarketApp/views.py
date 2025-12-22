@@ -4,9 +4,9 @@ from rest_framework import permissions
 from rest_framework import status
 from django.core.mail import send_mail
 from rest_framework.generics import ListAPIView
-from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
-from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Product,Subscription, Notification
-from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer, ProductSerializer,SubscriptionSerializer
+# from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
+from .models import Shoes, Kids_Wear, Mens_Wear, Electronics, Products, Fashion, Hero, TopProducts, Subscription, Notification
+from .serializers import ShoesSerializer, KidsWearSerializer, MensWearSerializer, ElectronicsSerializer, ProductsSerializer, FashionSerializer, HeroSerializer, TopProductsSerializer, SubscriptionSerializer
 
 # create your views here
 class SubscribeView(APIView):
@@ -159,17 +159,17 @@ class TopProductsListView(APIView):
 
 
 
-class ProductListView(ListAPIView):
-    serializer_class = ProductSerializer
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+# class ProductListView(ListAPIView):
+#     serializer_class = ProductSerializer
+#     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
-    def get_queryset(self):
-        search = self.request.GET.get('search', '').strip()
-        page_type = self.request.GET.get('type', '').strip().lower()
-        queryset = Product.objects.all()
-        if page_type:
-            queryset = queryset.filter(title__iexact=page_type)
-        if search:
-            queryset = queryset.filter(title__icontains=search)
-        return queryset
+#     def get_queryset(self):
+#         search = self.request.GET.get('search', '').strip()
+#         page_type = self.request.GET.get('type', '').strip().lower()
+#         queryset = Product.objects.all()
+#         if page_type:
+#             queryset = queryset.filter(title__iexact=page_type)
+#         if search:
+#             queryset = queryset.filter(title__icontains=search)
+#         return queryset
 

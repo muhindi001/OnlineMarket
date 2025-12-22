@@ -17,6 +17,8 @@ class Migration(migrations.Migration):
                 ('img', models.ImageField(blank=True, null=True, upload_to='products/')),
                 ('title', models.CharField(max_length=200)),
                 ('rating', models.DecimalField(decimal_places=1, default=0.0, max_digits=3)),
+                ('cost', models.DecimalField(max_digits=10, decimal_places=2)),
+                ('cart', models.BooleanField(default=False)), 
                 ('aosDelay', models.IntegerField(default=0)),
             ],
         ),

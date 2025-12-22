@@ -1,8 +1,6 @@
 import Slider from 'react-slick'
 import React from 'react'
 
-
-
 const TestimonialData = [
   {
     id: 1,
